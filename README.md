@@ -3,7 +3,7 @@
 A modern login UI demo with glassmorphism effects and floating label animations.  
 Frontend-only practice project.
 
-![Login Form Screenshot](screenshot.png)
+![Login Form Screenshot](screenshot.png.png)
 
 [🔗 Live Demo](https://your-demo-link.com)
 
