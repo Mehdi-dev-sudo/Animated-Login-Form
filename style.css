@@ -316,7 +316,7 @@ body::before {
   }
 }
 
-/* دارک مود واقعی */
+
 @media (prefers-color-scheme: dark) {
   body::before {
     filter: blur(16px) brightness(0.45);
