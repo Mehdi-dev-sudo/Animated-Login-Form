@@ -316,6 +316,10 @@ body::before {
   }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2c9a681f62a5d6df6e52a58c215a39b60b4803ff
 @media (prefers-color-scheme: dark) {
   body::before {
     filter: blur(16px) brightness(0.45);
