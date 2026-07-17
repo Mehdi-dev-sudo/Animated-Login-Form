@@ -2,7 +2,8 @@
 
 A modern authentication UI with glassmorphism design, smooth animations, and vanilla HTML/CSS/JS — no frameworks or build tools.
 
-![Screenshot](screenshot.png.png)
+![Screenshot](screenshot-singin.png)
+![Screenshot](screenshot-singup.png)
 
 ---
 
