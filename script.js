@@ -139,6 +139,14 @@
     }
   });
 
+  // ===== Keyboard: Escape closes toasts =====
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      var toasts = document.querySelectorAll(".toast");
+      toasts.forEach(function (t) { t.remove(); });
+    }
+  });
+
   // ===== Fill Demo Credentials =====
   var fillDemo = document.getElementById("fillDemo");
   if (fillDemo) {
