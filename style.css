@@ -607,18 +607,6 @@ body {
   animation: shake 0.45s ease;
 }
 
-/* ===== Scrollbar ===== */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--text-muted);
-  border-radius: 3px;
-}
-
 /* ===== Focus-visible ===== */
 :focus-visible {
   outline: 2px solid var(--primary);
