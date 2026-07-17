@@ -20,6 +20,7 @@
     if (!toastContainer) return;
     var toast = document.createElement("div");
     toast.className = "toast " + type;
+    toast.setAttribute("role", "alert");
     var icon = document.createElement("i");
     icon.className = type === "success"
       ? "fa-regular fa-circle-check"
