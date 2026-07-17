@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forgot Password — Glassmorphism UI</title>
+  <meta name="description" content="Reset your password." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔑</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .forgot-page {
+      max-width: 420px;
+      margin: 60px auto;
+      background: var(--glass);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+      animation: cardIn 0.7s cubic-bezier(0.22,1,0.36,1) both;
+      padding: 40px 32px 32px;
+    }
+    .forgot-page .icon-big {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #fff;
+      box-shadow: 0 0 0 0 rgba(255,0,128,0.4);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .forgot-page h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .forgot-page .subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 6px 0 28px;
+    }
+    .forgot-page .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color var(--transition);
+    }
+    .forgot-page .back-link:hover { color: var(--primary); }
+    .forgot-page .success-msg {
+      display: none;
+      text-align: center;
+      padding: 24px 0 8px;
+    }
+    .forgot-page .success-msg i {
+      font-size: 3rem;
+      color: #22c55e;
+      margin-bottom: 12px;
+    }
+    .forgot-page .success-msg p {
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .forgot-page.sent .form-wrap { display: none; }
+    .forgot-page.sent .success-msg { display: block; }
+  </style>
+</head>
+<body>
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb--1"></div>
+    <div class="orb orb--2"></div>
+  </div>
+
+  <main class="forgot-page" id="forgotPage">
+    <div class="form-wrap">
+      <div class="icon-big"><i class="fa-regular fa-key"></i></div>
+      <h1>Forgot Password</h1>
+      <p class="subtitle">Enter your email and we'll send you a reset link.</p>
+
+      <div class="field">
+        <div class="field-input">
+          <input type="email" id="resetEmail" class="input" placeholder=" " required inputmode="email" maxlength="254" autocorrect="off" autocapitalize="off" spellcheck="false" />
+          <label for="resetEmail">Email address</label>
+          <span class="icon"><i class="fa-regular fa-envelope" aria-hidden="true"></i></span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn" id="sendResetBtn">
+        <span class="btn-text">Send Reset Link</span>
+        <i class="fa-solid fa-circle-notch btn-spinner"></i>
+      </button>
+
+      <a href="index.html" class="back-link">&larr; Back to Login</a>
+    </div>
+
+    <div class="success-msg">
+      <i class="fa-regular fa-circle-check"></i>
+      <p>If an account with that email exists,<br />we've sent a reset link.</p>
+      <a href="index.html" class="back-link" style="margin-top:24px">&larr; Back to Login</a>
+    </div>
+  </main>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script>
+    document.getElementById("sendResetBtn").addEventListener("click", function () {
+      var email = document.getElementById("resetEmail").value.trim();
+      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      var field = document.getElementById("resetEmail");
+      field.classList.toggle("error", !valid);
+      if (!valid) {
+        field.classList.add("shake");
+        setTimeout(function () { field.classList.remove("shake"); }, 500);
+        return;
+      }
+      this.classList.add("loading");
+      this.disabled = true;
+      setTimeout(function () {
+        document.getElementById("forgotPage").classList.add("sent");
+      }, 1200);
+    });
+    document.getElementById("resetEmail").addEventListener("keydown", function (e) {
+      if (e.key === "Enter") document.getElementById("sendResetBtn").click();
+    });
+  </script>
+</body>
+</html>
