@@ -211,8 +211,10 @@ body {
 
 /* ===== Input Fields ===== */
 .field {
-  position: relative;
   margin-bottom: 20px;
+}
+.field-input {
+  position: relative;
 }
 .field .input {
   width: 100%;
@@ -252,7 +254,7 @@ body {
 }
 
 /* ===== Floating Labels ===== */
-.field label {
+.field-input label {
   position: absolute;
   left: 44px;
   top: 50%;
@@ -268,8 +270,8 @@ body {
   padding: 0 4px;
   background: transparent;
 }
-.field .input:focus + label,
-.field .input:not(:placeholder-shown) + label {
+.field-input .input:focus + label,
+.field-input .input:not(:placeholder-shown) + label {
   top: -10px;
   left: 12px;
   font-size: 0.75rem;
@@ -290,8 +292,8 @@ body {
   pointer-events: none;
   transition: color var(--transition);
 }
-.field .input:focus ~ .icon,
-.field .input:not(:placeholder-shown) ~ .icon {
+.field-input .input:focus ~ .icon,
+.field-input .input:not(:placeholder-shown) ~ .icon {
   color: var(--primary);
 }
 
@@ -304,7 +306,7 @@ body {
   -webkit-text-fill-color: var(--text) !important;
   transition: background-color 5000s ease-in-out 0s;
 }
-.field .input:-webkit-autofill ~ label {
+.field-input .input:-webkit-autofill ~ label {
   top: -10px;
   left: 12px;
   font-size: 0.75rem;
@@ -313,12 +315,12 @@ body {
   padding: 0 6px;
   border-radius: 4px;
 }
-.field .input:-webkit-autofill ~ .icon {
+.field-input .input:-webkit-autofill ~ .icon {
   color: var(--primary);
 }
 
 /* ===== Password Toggle ===== */
-.toggle-pass {
+.field-input .toggle-pass {
   position: absolute;
   right: 8px;
   top: 50%;
@@ -687,25 +689,25 @@ body {
   .field {
     margin-bottom: 16px;
   }
-  .field .input {
+  .field-input .input {
     height: 46px;
     padding-left: 38px;
     font-size: 0.9rem;
   }
-  .field label {
+  .field-input label {
     left: 38px;
     font-size: 0.85rem;
   }
-  .field .input:focus + label,
-  .field .input:not(:placeholder-shown) + label {
+  .field-input .input:focus + label,
+  .field-input .input:not(:placeholder-shown) + label {
     left: 10px;
     font-size: 0.7rem;
   }
-  .field .icon {
+  .field-input .icon {
     left: 13px;
     font-size: 0.9rem;
   }
-  .toggle-pass {
+  .field-input .toggle-pass {
     width: 32px;
     height: 32px;
     right: 6px;
