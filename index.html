@@ -1,45 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Animated Login Form</title>
-    <link rel="stylesheet" href="style.css" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-  </head>
-  <body>
-    <div class="container">
-      <form action="#">
-        <div class="title">Login</div>
-        <div class="input-box">
-          <input type="text" id="email" placeholder=" " required />
-          <label for="email">Email</label>
-          <span class="input-icon"><i class="fas fa-envelope"></i></span>
-          <div class="underline"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auth — Glassmorphism UI</title>
+  <meta name="description" content="A modern login & signup form with glassmorphism design." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb--1"></div>
+    <div class="orb orb--2"></div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <main class="card">
+    <div class="card-inner">
+
+      <!-- ===== LOGIN ===== -->
+      <form class="form active" id="loginForm" novalidate>
+        <div class="avatar">
+          <i class="fa-regular fa-user"></i>
         </div>
-        <div class="input-box">
-          <input type="password" id="password" placeholder=" " required />
-          <label for="password">Password</label>
-          <span class="input-icon"><i class="fas fa-lock"></i></span>
-          <div class="underline"></div>
+        <h1 class="title">Welcome Back</h1>
+        <p class="subtitle">Sign in to your account</p>
+
+        <div class="field">
+          <input type="email" id="loginEmail" class="input" placeholder=" " required />
+          <label for="loginEmail">Email</label>
+          <span class="icon"><i class="fa-regular fa-envelope"></i></span>
         </div>
-        <div class="input-box button">
-          <input type="submit" value="continue" />
+
+        <div class="field">
+          <input type="password" id="loginPass" class="input" placeholder=" " required />
+          <label for="loginPass">Password</label>
+          <span class="icon"><i class="fa-solid fa-lock"></i></span>
+          <button type="button" class="toggle-pass" data-target="loginPass" aria-label="Toggle password">
+            <i class="fa-regular fa-eye"></i>
+          </button>
         </div>
+
+        <div class="row">
+          <label class="checkbox">
+            <input type="checkbox" id="remember" />
+            <span class="check"></span>
+            <span class="label-text">Remember me</span>
+          </label>
+          <a href="#" class="link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn">
+          <span class="btn-text">Sign In</span>
+          <i class="fa-solid fa-circle-notch btn-spinner"></i>
+        </button>
+
+        <p class="switch-text">
+          Don't have an account? <a href="#" class="link" data-form="signup">Sign up</a>
+        </p>
       </form>
-      <div class="option">or with social Media</div>
-      <div class="socials">
-        <a href="#" class="social-btn twitter"
-          ><i class="fab fa-twitter"></i>Twitter</a
-        >
-        <a href="#" class="social-btn facebook"
-          ><i class="fab fa-facebook-f"></i>Facebook</a
-        >
-      </div>
+
+      <!-- ===== SIGN UP ===== -->
+      <form class="form" id="signupForm" novalidate>
+        <div class="avatar">
+          <i class="fa-regular fa-user-plus"></i>
+        </div>
+        <h1 class="title">Create Account</h1>
+        <p class="subtitle">Join us today</p>
+
+        <div class="field">
+          <input type="text" id="signupName" class="input" placeholder=" " required />
+          <label for="signupName">Full Name</label>
+          <span class="icon"><i class="fa-regular fa-user"></i></span>
+        </div>
+
+        <div class="field">
+          <input type="email" id="signupEmail" class="input" placeholder=" " required />
+          <label for="signupEmail">Email</label>
+          <span class="icon"><i class="fa-regular fa-envelope"></i></span>
+        </div>
+
+        <div class="field">
+          <input type="password" id="signupPass" class="input" placeholder=" " required />
+          <label for="signupPass">Password</label>
+          <span class="icon"><i class="fa-solid fa-lock"></i></span>
+          <button type="button" class="toggle-pass" data-target="signupPass" aria-label="Toggle password">
+            <i class="fa-regular fa-eye"></i>
+          </button>
+        </div>
+
+        <div class="field">
+          <input type="password" id="signupConfirm" class="input" placeholder=" " required />
+          <label for="signupConfirm">Confirm Password</label>
+          <span class="icon"><i class="fa-solid fa-lock"></i></span>
+          <button type="button" class="toggle-pass" data-target="signupConfirm" aria-label="Toggle password">
+            <i class="fa-regular fa-eye"></i>
+          </button>
+        </div>
+
+        <label class="checkbox terms">
+          <input type="checkbox" id="terms" />
+          <span class="check"></span>
+          <span class="label-text">I agree to the <a href="#">Terms & Conditions</a></span>
+        </label>
+
+        <button type="submit" class="btn">
+          <span class="btn-text">Create Account</span>
+          <i class="fa-solid fa-circle-notch btn-spinner"></i>
+        </button>
+
+        <p class="switch-text">
+          Already have an account? <a href="#" class="link" data-form="login">Sign in</a>
+        </p>
+      </form>
+
     </div>
-  </body>
+  </main>
+
+  <script src="script.js"></script>
+</body>
 </html>

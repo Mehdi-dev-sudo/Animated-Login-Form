@@ -171,6 +171,9 @@ body {
   transition: border var(--transition), box-shadow var(--transition), background var(--transition);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+.field .input[type="password"] {
+  padding-right: 44px;
+}
 .field .input::placeholder { color: transparent; }
 .field .input:focus {
   border-color: var(--primary);
@@ -191,6 +194,9 @@ body {
   font-size: 0.9rem;
   color: var(--text-muted);
   pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   transition: 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
   padding: 0 4px;
