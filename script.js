@@ -148,17 +148,6 @@
     }
   });
 
-  // ===== Fill Demo Credentials =====
-  var fillDemo = document.getElementById("fillDemo");
-  if (fillDemo) {
-    fillDemo.addEventListener("click", function (e) {
-      e.preventDefault();
-      loginEmail.value = "demo@example.com";
-      loginPass.value = "demo123";
-      showToast("Demo credentials filled!", "success");
-    });
-  }
-
   // ===== Remember Me (restore on load) =====
   (function () {
     var saved = localStorage.getItem("auth_remember");
@@ -210,16 +199,12 @@
       isLoading = false;
       loginForm.classList.remove("loading");
 
-      if (email === "demo@example.com" && pass === "demo123") {
-        showToast("Welcome back! Redirecting\u2026", "success");
-        // Save if "Remember me" is checked
-        if (document.getElementById("remember").checked) {
-          localStorage.setItem("auth_remember", JSON.stringify({ email: email, pass: pass }));
-        } else {
-          localStorage.removeItem("auth_remember");
-        }
+      showToast("Welcome back! Redirecting\u2026", "success");
+      // Save if "Remember me" is checked
+      if (document.getElementById("remember").checked) {
+        localStorage.setItem("auth_remember", JSON.stringify({ email: email, pass: pass }));
       } else {
-        showToast("Invalid credentials. Try demo@example.com / demo123", "error");
+        localStorage.removeItem("auth_remember");
       }
     }, 1500);
   });
