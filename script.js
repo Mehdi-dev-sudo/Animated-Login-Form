@@ -87,6 +87,21 @@
     });
   });
 
+  // ===== Remember Me (restore on load) =====
+  (function () {
+    var saved = localStorage.getItem("auth_remember");
+    if (saved) {
+      try {
+        var data = JSON.parse(saved);
+        if (data.email && data.pass) {
+          loginEmail.value = data.email;
+          loginPass.value = data.pass;
+          document.getElementById("remember").checked = true;
+        }
+      } catch (_) {}
+    }
+  })();
+
   // ===== Submit Login =====
   loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -125,6 +140,12 @@
 
       if (email === "demo@example.com" && pass === "demo123") {
         showToast("Welcome back! Redirecting\u2026", "success");
+        // Save if "Remember me" is checked
+        if (document.getElementById("remember").checked) {
+          localStorage.setItem("auth_remember", JSON.stringify({ email: email, pass: pass }));
+        } else {
+          localStorage.removeItem("auth_remember");
+        }
       } else {
         showToast("Invalid credentials. Try demo@example.com / demo123", "error");
       }
