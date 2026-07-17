@@ -6,7 +6,7 @@ A modern authentication UI with glassmorphism design, smooth animations, and van
 
 ---
 
-> **Live Demo:** [https://mehdi-dev-sudo.github.io/Animated-Login-Form/](https://mehdi-dev-sudo.github.io/Animated-Login-Form/)
+> **Live Demo:** [mehdi-dev-sudo.github.io/Animated-Login-Form](https://mehdi-dev-sudo.github.io/Animated-Login-Form/)
 
 ---
 
@@ -91,16 +91,32 @@ npx serve . -p 8080 -s
 
 Modern browsers with `backdrop-filter` support:
 - Chrome/Edge 76+
-- Firefox 103+ (behind `layout.css.backdrop-filter.enabled`)
+- Firefox 103+
 - Safari 9+
 - Opera 64+
 
-## License
+## Connect
 
-This project is [MIT licensed](LICENSE). Use it for any purpose, personal or commercial.
+<p align="center">
+  <a href="mailto:mehdi.khorshidi9339@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+  <a href="https://github.com/Mehdi-dev-sudo"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
+  <a href="https://t.me/Mehdi-dev-sudo"><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" /></a>
+</p>
 
 ---
 
-## Author
+## License
 
-**Mehdi Khorshidi far** — Crafted with care for product teams who appreciate clean, performant interfaces.
+MIT — see [LICENSE](LICENSE) for details.
+
+---
+
+<div align="center">
+  <p>
+    Built by <a href="https://github.com/Mehdi-dev-sudo">Mehdi Khorshidi far</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/Mehdi-dev-sudo/Animated-Login-Form">GitHub</a>
+    &nbsp;·&nbsp;
+    Portfolio project — no frameworks, no shortcuts
+  </p>
+</div>
