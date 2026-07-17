@@ -104,9 +104,15 @@
     if (!active || !target || active === target) return;
 
     active.classList.add("out");
+    // Clear old form fields
+    active.querySelectorAll(".input").forEach(function (el) { el.value = ""; });
+    active.querySelectorAll(".error").forEach(function (el) { el.classList.remove("error"); });
     setTimeout(function () {
       active.classList.remove("active", "out");
       target.classList.add("active");
+      document.getElementById("strengthBar").classList.remove("visible");
+      document.getElementById("strengthFill").style.width = "0%";
+      document.getElementById("strengthText").textContent = "";
       // Focus first input
       var firstInput = target.querySelector(".input");
       if (firstInput) firstInput.focus();
