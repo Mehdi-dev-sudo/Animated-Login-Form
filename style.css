@@ -359,6 +359,8 @@ body {
   user-select: none;
   font-size: 0.85rem;
   color: var(--text-muted);
+}
+.checkbox.terms {
   margin-bottom: 1rem;
 }
 .checkbox input {
