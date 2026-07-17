@@ -4,6 +4,12 @@ A modern authentication UI with glassmorphism design, smooth animations, and van
 
 ![Screenshot](screenshot.png.png)
 
+---
+
+> **Live Demo:** [https://mehdi-dev-sudo.github.io/Animated-Login-Form/](https://mehdi-dev-sudo.github.io/Animated-Login-Form/)
+
+---
+
 ## Pages
 
 | Page | Path | Description |
@@ -91,4 +97,10 @@ Modern browsers with `backdrop-filter` support:
 
 ## License
 
-MIT
+This project is [MIT licensed](LICENSE). Use it for any purpose, personal or commercial.
+
+---
+
+## Author
+
+**Mehdi Khorshidi far** — Crafted with care for product teams who appreciate clean, performant interfaces.
