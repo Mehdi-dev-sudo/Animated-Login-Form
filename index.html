@@ -24,9 +24,9 @@
     <div class="orb orb--2"></div>
   </div>
 
-  <div class="toast-container" id="toastContainer"></div>
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-relevant="additions removals"></div>
 
-  <main class="card">
+  <main class="card" role="main" aria-label="Authentication forms">
     <div class="card-inner">
 
       <!-- ===== LOGIN ===== -->
@@ -40,13 +40,13 @@
         <div class="field">
           <input type="email" id="loginEmail" class="input" placeholder=" " required inputmode="email" autocomplete="email" />
           <label for="loginEmail">Email</label>
-          <span class="icon"><i class="fa-regular fa-envelope"></i></span>
+          <span class="icon"><i class="fa-regular fa-envelope" aria-hidden="true"></i></span>
         </div>
 
         <div class="field">
           <input type="password" id="loginPass" class="input" placeholder=" " required autocomplete="current-password" />
           <label for="loginPass">Password</label>
-          <span class="icon"><i class="fa-solid fa-lock"></i></span>
+          <span class="icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>
           <button type="button" class="toggle-pass" data-target="loginPass" aria-label="Toggle password">
             <i class="fa-regular fa-eye"></i>
           </button>
@@ -86,19 +86,19 @@
         <div class="field">
           <input type="text" id="signupName" class="input" placeholder=" " required autocomplete="name" />
           <label for="signupName">Full Name</label>
-          <span class="icon"><i class="fa-regular fa-user"></i></span>
+          <span class="icon"><i class="fa-regular fa-user" aria-hidden="true"></i></span>
         </div>
 
         <div class="field">
           <input type="email" id="signupEmail" class="input" placeholder=" " required inputmode="email" autocomplete="email" />
           <label for="signupEmail">Email</label>
-          <span class="icon"><i class="fa-regular fa-envelope"></i></span>
+          <span class="icon"><i class="fa-regular fa-envelope" aria-hidden="true"></i></span>
         </div>
 
         <div class="field">
           <input type="password" id="signupPass" class="input" placeholder=" " required autocomplete="new-password" />
           <label for="signupPass">Password</label>
-          <span class="icon"><i class="fa-solid fa-lock"></i></span>
+          <span class="icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>
           <button type="button" class="toggle-pass" data-target="signupPass" aria-label="Toggle password">
             <i class="fa-regular fa-eye"></i>
           </button>
@@ -111,7 +111,7 @@
         <div class="field">
           <input type="password" id="signupConfirm" class="input" placeholder=" " required autocomplete="new-password" />
           <label for="signupConfirm">Confirm Password</label>
-          <span class="icon"><i class="fa-solid fa-lock"></i></span>
+          <span class="icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>
           <button type="button" class="toggle-pass" data-target="signupConfirm" aria-label="Toggle password">
             <i class="fa-regular fa-eye"></i>
           </button>
