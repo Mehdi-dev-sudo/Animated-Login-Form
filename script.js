@@ -126,6 +126,16 @@
     });
   });
 
+  // ===== Forgot Password =====
+  document.querySelectorAll(".row .link").forEach(function (link) {
+    if (link.textContent.trim() === "Forgot password?") {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        showToast("Password reset link sent to your email.", "success");
+      });
+    }
+  });
+
   // ===== Fill Demo Credentials =====
   var fillDemo = document.getElementById("fillDemo");
   if (fillDemo) {
