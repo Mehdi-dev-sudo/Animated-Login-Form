@@ -113,6 +113,9 @@
       document.getElementById("strengthBar").classList.remove("visible");
       document.getElementById("strengthFill").style.width = "0%";
       document.getElementById("strengthText").textContent = "";
+      // Avatar enter animation
+      var avatar = target.querySelector(".avatar");
+      if (avatar) { avatar.classList.remove("bounce-in"); void avatar.offsetWidth; avatar.classList.add("bounce-in"); }
       // Focus first input
       var firstInput = target.querySelector(".input");
       if (firstInput) firstInput.focus();
