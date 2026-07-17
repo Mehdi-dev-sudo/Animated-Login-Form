@@ -319,6 +319,34 @@ body {
   text-decoration: underline;
 }
 
+/* ===== Password Strength ===== */
+.strength-bar {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  margin-top: 8px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.strength-bar.visible {
+  opacity: 1;
+}
+.strength-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 2px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+.strength-text {
+  display: block;
+  font-size: 0.72rem;
+  margin-top: 3px;
+  height: 14px;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
 /* ===== Links ===== */
 .link {
   color: var(--secondary);
@@ -441,6 +469,24 @@ body {
   40%, 80% { transform: translateX(6px); }
 }
 .shake { animation: shake 0.45s ease; }
+
+/* ===== Demo Hint ===== */
+.demo-hint {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 16px;
+}
+.demo-hint a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-style: dotted;
+  transition: color var(--transition);
+}
+.demo-hint a:hover {
+  color: var(--primary);
+}
 
 /* ===== Selection ===== */
 ::selection {

@@ -64,6 +64,39 @@
     if (show) { input.classList.add("shake"); setTimeout(function () { input.classList.remove("shake"); }, 500); }
   }
 
+  // ===== Password Strength =====
+  var strengthFill = document.getElementById("strengthFill");
+  var strengthText = document.getElementById("strengthText");
+  var strengthBar = document.getElementById("strengthBar");
+
+  if (signupPass && strengthFill && strengthText && strengthBar) {
+    signupPass.addEventListener("input", function () {
+      var val = this.value;
+      if (!val) {
+        strengthBar.classList.remove("visible");
+        strengthFill.style.width = "0%";
+        strengthText.textContent = "";
+        return;
+      }
+      strengthBar.classList.add("visible");
+      var score = 0;
+      if (val.length >= 6) score++;
+      if (val.length >= 10) score++;
+      if (/[a-z]/.test(val) && /[A-Z]/.test(val)) score++;
+      if (/\d/.test(val)) score++;
+      if (/[^a-zA-Z0-9]/.test(val)) score++;
+
+      var levels = ["Weak", "Fair", "Good", "Strong", "Very Strong"];
+      var colors = ["#ef4444", "#f59e0b", "#22c55e", "#06b6d4", "#a855f7"];
+      var pcts = ["20%", "40%", "60%", "80%", "100%"];
+      var idx = Math.min(score, 4);
+      strengthFill.style.width = pcts[idx];
+      strengthFill.style.background = colors[idx];
+      strengthText.textContent = levels[idx];
+      strengthText.style.color = colors[idx];
+    });
+  }
+
   // ===== Form Switch =====
   function switchForm(formId) {
     var active = document.querySelector(".form.active");
@@ -86,6 +119,17 @@
       switchForm(this.getAttribute("data-form") + "Form");
     });
   });
+
+  // ===== Fill Demo Credentials =====
+  var fillDemo = document.getElementById("fillDemo");
+  if (fillDemo) {
+    fillDemo.addEventListener("click", function (e) {
+      e.preventDefault();
+      loginEmail.value = "demo@example.com";
+      loginPass.value = "demo123";
+      showToast("Demo credentials filled!", "success");
+    });
+  }
 
   // ===== Remember Me (restore on load) =====
   (function () {
