@@ -145,6 +145,36 @@
     });
   });
 
+  // ===== Form Draft Persistence (sessionStorage) =====
+  (function () {
+    var KEY = "auth_draft";
+    try {
+      var draft = sessionStorage.getItem(KEY);
+      if (draft) {
+        var data = JSON.parse(draft);
+        Object.keys(data).forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.value = data[id];
+        });
+      }
+    } catch (_) {}
+    function saveDraft() {
+      var inputs = signupForm.querySelectorAll(".input");
+      var data = {};
+      inputs.forEach(function (inp) {
+        if (inp.value) data[inp.id] = inp.value;
+      });
+      if (Object.keys(data).length) {
+        sessionStorage.setItem(KEY, JSON.stringify(data));
+      } else {
+        sessionStorage.removeItem(KEY);
+      }
+    }
+    signupForm.querySelectorAll(".input").forEach(function (inp) {
+      inp.addEventListener("input", saveDraft);
+    });
+  })();
+
   // ===== Keyboard: Escape closes toasts =====
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
@@ -264,6 +294,7 @@
       isLoading = false;
       signupForm.classList.remove("loading");
       showToast("Account created! You can now sign in.", "success");
+      sessionStorage.removeItem("auth_draft");
       switchForm("loginForm");
     }, 1500);
   });
