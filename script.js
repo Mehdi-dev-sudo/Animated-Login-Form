@@ -61,10 +61,85 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
   }
 
-  function showError(input, show) {
+  function showError(input, show, msg) {
     input.classList.toggle("error", show);
     if (show) { input.classList.add("shake"); setTimeout(function () { input.classList.remove("shake"); }, 500); }
+    else { input.classList.remove("error"); }
+    var errorText = input.closest(".field").querySelector(".error-text");
+    if (errorText) {
+      errorText.textContent = show ? (msg || "") : "";
+    }
+    // Remove error toast when user starts fixing
+    if (show) {
+      function clearErr() {
+        showError(input, false);
+        input.removeEventListener("input", clearErr);
+        input.removeEventListener("focus", clearErr);
+      }
+      input.addEventListener("input", clearErr);
+      input.addEventListener("focus", clearErr);
+    }
   }
+
+  // ===== Ripple Effect on Buttons =====
+  document.querySelectorAll(".btn").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      if (this.disabled) return;
+      var rect = this.getBoundingClientRect();
+      var ripple = document.createElement("span");
+      ripple.className = "ripple";
+      var size = Math.max(rect.width, rect.height);
+      var x = e.clientX - rect.left - size / 2;
+      var y = e.clientY - rect.top - size / 2;
+      ripple.style.left = x + "px";
+      ripple.style.top = y + "px";
+      ripple.style.width = ripple.style.height = size + "px";
+      this.appendChild(ripple);
+      setTimeout(function () { ripple.remove(); }, 600);
+    });
+  });
+
+  // ===== Password Generator =====
+  var genBtn = document.getElementById("genPass");
+  if (genBtn && signupPass) {
+    genBtn.addEventListener("click", function () {
+      var upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      var lower = "abcdefghijklmnopqrstuvwxyz";
+      var digits = "0123456789";
+      var special = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+      var all = upper + lower + digits + special;
+      var pass = "", len = 20;
+      // Ensure at least one of each type
+      pass += upper[Math.floor(Math.random() * upper.length)];
+      pass += lower[Math.floor(Math.random() * lower.length)];
+      pass += digits[Math.floor(Math.random() * digits.length)];
+      pass += special[Math.floor(Math.random() * special.length)];
+      for (var i = pass.length; i < len; i++) {
+        pass += all[Math.floor(Math.random() * all.length)];
+      }
+      pass = pass.split("").sort(function () { return Math.random() - 0.5; }).join("");
+      signupPass.value = pass;
+      signupConfirm.value = pass;
+      signupPass.dispatchEvent(new Event("input"));
+      signupConfirm.dispatchEvent(new Event("input"));
+      showToast("Password generated and copied to both fields", "success");
+    });
+  }
+
+  // ===== Character Counters =====
+  document.querySelectorAll(".char-counter").forEach(function (counter) {
+    var input = document.getElementById(counter.getAttribute("data-for"));
+    if (!input) return;
+    var max = parseInt(input.getAttribute("maxlength"), 10) || 999;
+    function update() {
+      var len = input.value.length;
+      counter.textContent = len + "/" + max;
+      counter.classList.toggle("warn", len > max * 0.8);
+      counter.classList.toggle("danger", len >= max);
+    }
+    input.addEventListener("input", update);
+    update();
+  });
 
   // ===== Password Strength =====
   var strengthFill = document.getElementById("strengthFill");
@@ -131,6 +206,36 @@
     });
   });
 
+  // ===== Form Draft Persistence (sessionStorage) =====
+  (function () {
+    var KEY = "auth_draft";
+    try {
+      var draft = sessionStorage.getItem(KEY);
+      if (draft) {
+        var data = JSON.parse(draft);
+        Object.keys(data).forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.value = data[id];
+        });
+      }
+    } catch (_) {}
+    function saveDraft() {
+      var inputs = signupForm.querySelectorAll(".input");
+      var data = {};
+      inputs.forEach(function (inp) {
+        if (inp.value) data[inp.id] = inp.value;
+      });
+      if (Object.keys(data).length) {
+        sessionStorage.setItem(KEY, JSON.stringify(data));
+      } else {
+        sessionStorage.removeItem(KEY);
+      }
+    }
+    signupForm.querySelectorAll(".input").forEach(function (inp) {
+      inp.addEventListener("input", saveDraft);
+    });
+  })();
+
   // ===== Theme Toggle =====
   (function () {
     var saved = localStorage.getItem("auth_theme");
@@ -178,13 +283,13 @@
     var valid = true;
 
     if (!email || !isValidEmail(email)) {
-      showError(loginEmail, true);
+      showError(loginEmail, true, "Valid email required");
       valid = false;
     } else {
       showError(loginEmail, false);
     }
     if (!pass || pass.length < 6) {
-      showError(loginPass, true);
+      showError(loginPass, true, "At least 6 characters");
       valid = false;
     } else {
       showError(loginPass, false);
@@ -199,10 +304,14 @@
 
     isLoading = true;
     loginForm.classList.add("loading");
+    // Avatar success hint
+    var loginAvatar = loginForm.querySelector(".avatar i");
+    if (loginAvatar) { loginAvatar.className = "fa-regular fa-circle-check"; }
 
     setTimeout(function () {
       isLoading = false;
       loginForm.classList.remove("loading");
+      if (loginAvatar) { loginAvatar.className = "fa-regular fa-user"; }
 
       showToast("Welcome back! Redirecting\u2026", "success");
       // Save if "Remember me" is checked
@@ -227,25 +336,25 @@
     var valid = true;
 
     if (!name || name.length < 2) {
-      showError(signupName, true);
+      showError(signupName, true, "Name must be at least 2 characters");
       valid = false;
     } else {
       showError(signupName, false);
     }
     if (!email || !isValidEmail(email)) {
-      showError(signupEmail, true);
+      showError(signupEmail, true, "Valid email required");
       valid = false;
     } else {
       showError(signupEmail, false);
     }
     if (!pass || pass.length < 6) {
-      showError(signupPass, true);
+      showError(signupPass, true, "At least 6 characters");
       valid = false;
     } else {
       showError(signupPass, false);
     }
     if (pass !== confirm) {
-      showError(signupConfirm, true);
+      showError(signupConfirm, true, "Passwords do not match");
       valid = false;
     } else {
       showError(signupConfirm, false);
@@ -259,11 +368,15 @@
 
     isLoading = true;
     signupForm.classList.add("loading");
+    var signupAvatar = signupForm.querySelector(".avatar i");
+    if (signupAvatar) { signupAvatar.className = "fa-regular fa-circle-check"; }
 
     setTimeout(function () {
       isLoading = false;
       signupForm.classList.remove("loading");
+      if (signupAvatar) { signupAvatar.className = "fa-regular fa-user-plus"; }
       showToast("Account created! You can now sign in.", "success");
+      sessionStorage.removeItem("auth_draft");
       switchForm("loginForm");
     }, 1500);
   });
