@@ -65,6 +65,24 @@
     if (show) { input.classList.add("shake"); setTimeout(function () { input.classList.remove("shake"); }, 500); }
   }
 
+  // ===== Ripple Effect on Buttons =====
+  document.querySelectorAll(".btn").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      if (this.disabled) return;
+      var rect = this.getBoundingClientRect();
+      var ripple = document.createElement("span");
+      ripple.className = "ripple";
+      var size = Math.max(rect.width, rect.height);
+      var x = e.clientX - rect.left - size / 2;
+      var y = e.clientY - rect.top - size / 2;
+      ripple.style.left = x + "px";
+      ripple.style.top = y + "px";
+      ripple.style.width = ripple.style.height = size + "px";
+      this.appendChild(ripple);
+      setTimeout(function () { ripple.remove(); }, 600);
+    });
+  });
+
   // ===== Password Generator =====
   var genBtn = document.getElementById("genPass");
   if (genBtn && signupPass) {
