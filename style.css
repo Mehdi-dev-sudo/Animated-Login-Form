@@ -252,6 +252,21 @@ body {
   border-color: #ef4444;
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
+.error-text {
+  display: block;
+  font-size: 0.72rem;
+  color: #ef4444;
+  margin-top: 4px;
+  padding-left: 4px;
+  min-height: 1em;
+}
+.field .input.error + .error-text,
+.field .input.error ~ .error-text {
+  display: block;
+}
+.error-text:empty {
+  display: none;
+}
 
 /* ===== Floating Labels ===== */
 .field-input label {

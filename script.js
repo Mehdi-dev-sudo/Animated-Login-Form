@@ -60,10 +60,14 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
   }
 
-  function showError(input, show) {
+  function showError(input, show, msg) {
     input.classList.toggle("error", show);
     if (show) { input.classList.add("shake"); setTimeout(function () { input.classList.remove("shake"); }, 500); }
     else { input.classList.remove("error"); }
+    var errorText = input.closest(".field").querySelector(".error-text");
+    if (errorText) {
+      errorText.textContent = show ? (msg || "") : "";
+    }
     // Remove error toast when user starts fixing
     if (show) {
       function clearErr() {
@@ -264,13 +268,13 @@
     var valid = true;
 
     if (!email || !isValidEmail(email)) {
-      showError(loginEmail, true);
+      showError(loginEmail, true, "Valid email required");
       valid = false;
     } else {
       showError(loginEmail, false);
     }
     if (!pass || pass.length < 6) {
-      showError(loginPass, true);
+      showError(loginPass, true, "At least 6 characters");
       valid = false;
     } else {
       showError(loginPass, false);
@@ -317,25 +321,25 @@
     var valid = true;
 
     if (!name || name.length < 2) {
-      showError(signupName, true);
+      showError(signupName, true, "Name must be at least 2 characters");
       valid = false;
     } else {
       showError(signupName, false);
     }
     if (!email || !isValidEmail(email)) {
-      showError(signupEmail, true);
+      showError(signupEmail, true, "Valid email required");
       valid = false;
     } else {
       showError(signupEmail, false);
     }
     if (!pass || pass.length < 6) {
-      showError(signupPass, true);
+      showError(signupPass, true, "At least 6 characters");
       valid = false;
     } else {
       showError(signupPass, false);
     }
     if (pass !== confirm) {
-      showError(signupConfirm, true);
+      showError(signupConfirm, true, "Passwords do not match");
       valid = false;
     } else {
       showError(signupConfirm, false);
