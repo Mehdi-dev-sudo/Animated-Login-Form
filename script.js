@@ -52,6 +52,7 @@
       this.querySelector("i").className = isPass
         ? "fa-regular fa-eye-slash"
         : "fa-regular fa-eye";
+      this.setAttribute("data-tooltip", isPass ? "Hide password" : "Show password");
     });
   });
 
@@ -134,11 +135,13 @@
   (function () {
     var saved = localStorage.getItem("auth_theme");
     if (saved === "light") document.documentElement.setAttribute("data-theme", "light");
+    document.getElementById("themeToggle").setAttribute("data-tooltip", saved === "light" ? "Dark mode" : "Light mode");
     document.getElementById("themeToggle").addEventListener("click", function () {
       var html = document.documentElement;
       var isLight = html.getAttribute("data-theme") === "light";
       html.setAttribute("data-theme", isLight ? "" : "light");
       localStorage.setItem("auth_theme", isLight ? "" : "light");
+      this.setAttribute("data-tooltip", isLight ? "Dark mode" : "Light mode");
     });
   })();
 

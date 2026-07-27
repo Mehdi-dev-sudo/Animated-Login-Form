@@ -399,6 +399,37 @@ body {
   transition: all var(--transition);
   font-size: 0.95rem;
 }
+.field-input .toggle-pass:hover {
+  color: var(--primary);
+  background: rgba(168, 85, 247, 0.08);
+}
+
+/* ===== Tooltip ===== */
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  white-space: nowrap;
+  background: var(--label-bg);
+  color: var(--text);
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.18s ease;
+  border: 1px solid var(--glass-border);
+}
+[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
 .toggle-pass:hover {
   color: var(--primary);
   background: rgba(168, 85, 247, 0.08);
