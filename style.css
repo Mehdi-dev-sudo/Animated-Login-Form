@@ -8,16 +8,57 @@
 }
 
 :root {
+  /* Brand */
   --primary: #a855f7;
   --secondary: #ff0080;
+  --accent: #22c55e;
+
+  /* Surfaces */
   --glass: rgba(255, 255, 255, 0.06);
   --glass-border: rgba(255, 255, 255, 0.1);
   --input-bg: rgba(255, 255, 255, 0.06);
   --label-bg: rgba(10, 6, 30, 0.92);
+
+  /* Text */
   --text: #f1f1f1;
   --text-muted: rgba(255, 255, 255, 0.45);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Border */
+  --radius-sm: 8px;
   --radius: 14px;
+  --radius-lg: 24px;
+  --border-w: 1.5px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 4px 16px rgba(255, 0, 128, 0.25);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+  /* Animation */
   --transition: 0.25s ease;
+  --transition-fast: 0.15s ease;
+  --transition-slow: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Misc */
+  --input-h: 50px;
+}
+
+[data-theme="light"] {
+  --glass: rgba(255, 255, 255, 0.35);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --input-bg: rgba(0, 0, 0, 0.04);
+  --label-bg: rgba(255, 255, 255, 0.95);
+  --text: #1a1a2e;
+  --text-muted: rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 html {
