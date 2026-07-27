@@ -63,6 +63,17 @@
   function showError(input, show) {
     input.classList.toggle("error", show);
     if (show) { input.classList.add("shake"); setTimeout(function () { input.classList.remove("shake"); }, 500); }
+    else { input.classList.remove("error"); }
+    // Remove error toast when user starts fixing
+    if (show) {
+      function clearErr() {
+        showError(input, false);
+        input.removeEventListener("input", clearErr);
+        input.removeEventListener("focus", clearErr);
+      }
+      input.addEventListener("input", clearErr);
+      input.addEventListener("focus", clearErr);
+    }
   }
 
   // ===== Ripple Effect on Buttons =====
