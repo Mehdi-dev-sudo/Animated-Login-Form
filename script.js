@@ -65,6 +65,33 @@
     if (show) { input.classList.add("shake"); setTimeout(function () { input.classList.remove("shake"); }, 500); }
   }
 
+  // ===== Password Generator =====
+  var genBtn = document.getElementById("genPass");
+  if (genBtn && signupPass) {
+    genBtn.addEventListener("click", function () {
+      var upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      var lower = "abcdefghijklmnopqrstuvwxyz";
+      var digits = "0123456789";
+      var special = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+      var all = upper + lower + digits + special;
+      var pass = "", len = 20;
+      // Ensure at least one of each type
+      pass += upper[Math.floor(Math.random() * upper.length)];
+      pass += lower[Math.floor(Math.random() * lower.length)];
+      pass += digits[Math.floor(Math.random() * digits.length)];
+      pass += special[Math.floor(Math.random() * special.length)];
+      for (var i = pass.length; i < len; i++) {
+        pass += all[Math.floor(Math.random() * all.length)];
+      }
+      pass = pass.split("").sort(function () { return Math.random() - 0.5; }).join("");
+      signupPass.value = pass;
+      signupConfirm.value = pass;
+      signupPass.dispatchEvent(new Event("input"));
+      signupConfirm.dispatchEvent(new Event("input"));
+      showToast("Password generated and copied to both fields", "success");
+    });
+  }
+
   // ===== Character Counters =====
   document.querySelectorAll(".char-counter").forEach(function (counter) {
     var input = document.getElementById(counter.getAttribute("data-for"));

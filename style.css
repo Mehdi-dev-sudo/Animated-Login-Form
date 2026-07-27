@@ -343,6 +343,30 @@ body {
   background: rgba(168, 85, 247, 0.08);
 }
 
+/* ===== Password Generator ===== */
+.gen-pass {
+  position: absolute;
+  right: 46px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all var(--transition);
+  font-size: 0.85rem;
+}
+.gen-pass:hover {
+  color: var(--primary);
+  background: rgba(168, 85, 247, 0.08);
+}
+
 /* ===== Row (remember + forgot) ===== */
 .row {
   display: flex;
