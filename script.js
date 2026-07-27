@@ -120,7 +120,7 @@
       // Focus first input
       var firstInput = target.querySelector(".input");
       if (firstInput) firstInput.focus();
-    }, 300);
+    }, 250);
   }
 
   document.querySelectorAll("[data-form]").forEach(function (link) {
