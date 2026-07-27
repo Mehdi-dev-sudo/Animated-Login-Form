@@ -441,6 +441,24 @@ body {
   height: 14px;
   color: var(--text-muted);
   transition: color var(--transition);
+  font-weight: 500;
+}
+
+/* ===== Character Counter ===== */
+.char-counter {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: 2px;
+  height: 14px;
+  transition: color var(--transition);
+}
+.char-counter.warn {
+  color: #f59e0b;
+}
+.char-counter.danger {
+  color: #ef4444;
 }
 
 /* ===== Links ===== */

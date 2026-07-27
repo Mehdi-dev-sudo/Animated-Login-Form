@@ -65,6 +65,21 @@
     if (show) { input.classList.add("shake"); setTimeout(function () { input.classList.remove("shake"); }, 500); }
   }
 
+  // ===== Character Counters =====
+  document.querySelectorAll(".char-counter").forEach(function (counter) {
+    var input = document.getElementById(counter.getAttribute("data-for"));
+    if (!input) return;
+    var max = parseInt(input.getAttribute("maxlength"), 10) || 999;
+    function update() {
+      var len = input.value.length;
+      counter.textContent = len + "/" + max;
+      counter.classList.toggle("warn", len > max * 0.8);
+      counter.classList.toggle("danger", len >= max);
+    }
+    input.addEventListener("input", update);
+    update();
+  });
+
   // ===== Password Strength =====
   var strengthFill = document.getElementById("strengthFill");
   var strengthText = document.getElementById("strengthText");
