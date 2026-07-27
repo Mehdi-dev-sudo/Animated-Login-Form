@@ -130,6 +130,18 @@
     });
   });
 
+  // ===== Theme Toggle =====
+  (function () {
+    var saved = localStorage.getItem("auth_theme");
+    if (saved === "light") document.documentElement.setAttribute("data-theme", "light");
+    document.getElementById("themeToggle").addEventListener("click", function () {
+      var html = document.documentElement;
+      var isLight = html.getAttribute("data-theme") === "light";
+      html.setAttribute("data-theme", isLight ? "" : "light");
+      localStorage.setItem("auth_theme", isLight ? "" : "light");
+    });
+  })();
+
   // ===== Keyboard: Escape closes toasts =====
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
