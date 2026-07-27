@@ -285,10 +285,14 @@
 
     isLoading = true;
     loginForm.classList.add("loading");
+    // Avatar success hint
+    var loginAvatar = loginForm.querySelector(".avatar i");
+    if (loginAvatar) { loginAvatar.className = "fa-regular fa-circle-check"; }
 
     setTimeout(function () {
       isLoading = false;
       loginForm.classList.remove("loading");
+      if (loginAvatar) { loginAvatar.className = "fa-regular fa-user"; }
 
       showToast("Welcome back! Redirecting\u2026", "success");
       // Save if "Remember me" is checked
@@ -345,10 +349,13 @@
 
     isLoading = true;
     signupForm.classList.add("loading");
+    var signupAvatar = signupForm.querySelector(".avatar i");
+    if (signupAvatar) { signupAvatar.className = "fa-regular fa-circle-check"; }
 
     setTimeout(function () {
       isLoading = false;
       signupForm.classList.remove("loading");
+      if (signupAvatar) { signupAvatar.className = "fa-regular fa-user-plus"; }
       showToast("Account created! You can now sign in.", "success");
       sessionStorage.removeItem("auth_draft");
       switchForm("loginForm");
