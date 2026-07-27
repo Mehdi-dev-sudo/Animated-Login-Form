@@ -549,6 +549,29 @@ body {
   }
 }
 
+/* ===== Button Variants ===== */
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  box-shadow: none;
+}
+.btn-outline:hover {
+  background: rgba(168, 85, 247, 0.08);
+  box-shadow: none;
+}
+.btn-ghost {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  box-shadow: none;
+}
+.btn-ghost:hover {
+  color: var(--primary);
+  background: rgba(168, 85, 247, 0.06);
+  box-shadow: none;
+}
+
 /* ===== Switch Text ===== */
 .switch-text {
   text-align: center;
