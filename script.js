@@ -374,7 +374,7 @@
     setTimeout(function () {
       isLoading = false;
       signupForm.classList.remove("loading");
-      if (signupAvatar) { signupAvatar.className = "fa-regular fa-user-plus"; }
+      if (signupAvatar) { signupAvatar.className = "fa-solid fa-user-plus"; }
       showToast("Account created! You can now sign in.", "success");
       sessionStorage.removeItem("auth_draft");
       switchForm("loginForm");
