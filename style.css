@@ -887,9 +887,18 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .orb,
   .card,
+  .panel,
   .form,
   .toast,
-  .avatar {
+  .avatar,
+  .avatar::after,
+  .ripple,
+  .shake,
+  .skeleton {
+    animation: none !important;
+  }
+  .terms-page section {
+    opacity: 1 !important;
     animation: none !important;
   }
   * {
