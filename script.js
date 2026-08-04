@@ -13,7 +13,20 @@
   const signupPass = document.getElementById("signupPass");
   const signupConfirm = document.getElementById("signupConfirm");
 
+  const loginBtn = loginForm.querySelector(".btn");
+  const signupBtn = signupForm.querySelector(".btn");
+  const announcer = document.getElementById("a11yAnnounce");
+
   let isLoading = false;
+
+  function announce(msg) {
+    if (announcer) announcer.textContent = msg;
+  }
+
+  function setLoading(form, btn, busy) {
+    form.setAttribute("aria-busy", busy ? "true" : "false");
+    btn.disabled = busy;
+  }
 
   // ===== Toast =====
   function showToast(message, type) {
@@ -63,8 +76,12 @@
 
   function showError(input, show, msg) {
     input.classList.toggle("error", show);
-    if (show) { input.classList.add("shake"); setTimeout(function () { input.classList.remove("shake"); }, 500); }
-    else { input.classList.remove("error"); }
+    input.setAttribute("aria-invalid", show ? "true" : "false");
+    if (show) {
+      input.classList.remove("shake");
+      void input.offsetWidth;
+      input.classList.add("shake");
+    }
     var errorText = input.closest(".field").querySelector(".error-text");
     if (errorText) {
       errorText.textContent = show ? (msg || "") : "";
@@ -85,6 +102,7 @@
   document.querySelectorAll(".btn").forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       if (this.disabled) return;
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       var rect = this.getBoundingClientRect();
       var ripple = document.createElement("span");
       ripple.className = "ripple";
@@ -122,7 +140,7 @@
       signupConfirm.value = pass;
       signupPass.dispatchEvent(new Event("input"));
       signupConfirm.dispatchEvent(new Event("input"));
-      showToast("Password generated and copied to both fields", "success");
+      showToast("Password generated and filled in both fields", "success");
     });
   }
 
@@ -181,21 +199,27 @@
     if (!active || !target || active === target) return;
 
     active.classList.add("out");
-    // Clear old form fields
-    active.querySelectorAll(".input").forEach(function (el) { el.value = ""; });
-    active.querySelectorAll(".error").forEach(function (el) { el.classList.remove("error"); });
+    // Clear old form fields, errors, and ARIA error state
+    active.querySelectorAll(".input").forEach(function (el) {
+      el.value = "";
+      el.classList.remove("error");
+      el.setAttribute("aria-invalid", "false");
+      var err = el.closest(".field").querySelector(".error-text");
+      if (err) err.textContent = "";
+    });
     setTimeout(function () {
       active.classList.remove("active", "out");
       target.classList.add("active");
-      document.getElementById("strengthBar").classList.remove("visible");
-      document.getElementById("strengthFill").style.width = "0%";
-      document.getElementById("strengthText").textContent = "";
+      strengthBar.classList.remove("visible");
+      strengthFill.style.width = "0%";
+      strengthText.textContent = "";
       // Avatar enter animation
       var avatar = target.querySelector(".avatar");
       if (avatar) { avatar.classList.remove("bounce-in"); void avatar.offsetWidth; avatar.classList.add("bounce-in"); }
       // Focus first input
       var firstInput = target.querySelector(".input");
       if (firstInput) firstInput.focus();
+      announce(formId === "loginForm" ? "Sign in form shown" : "Sign up form shown");
     }, 250);
   }
 
@@ -304,6 +328,7 @@
 
     isLoading = true;
     loginForm.classList.add("loading");
+    setLoading(loginForm, loginBtn, true);
     // Avatar success hint
     var loginAvatar = loginForm.querySelector(".avatar i");
     if (loginAvatar) { loginAvatar.className = "fa-regular fa-circle-check"; }
@@ -311,9 +336,11 @@
     setTimeout(function () {
       isLoading = false;
       loginForm.classList.remove("loading");
+      setLoading(loginForm, loginBtn, false);
       if (loginAvatar) { loginAvatar.className = "fa-regular fa-user"; }
 
       showToast("Welcome back! Redirecting\u2026", "success");
+      announce("Signed in successfully.");
       // Save if "Remember me" is checked
       if (document.getElementById("remember").checked) {
         localStorage.setItem("auth_remember", JSON.stringify({ email: email, pass: pass }));
@@ -368,14 +395,17 @@
 
     isLoading = true;
     signupForm.classList.add("loading");
+    setLoading(signupForm, signupBtn, true);
     var signupAvatar = signupForm.querySelector(".avatar i");
     if (signupAvatar) { signupAvatar.className = "fa-regular fa-circle-check"; }
 
     setTimeout(function () {
       isLoading = false;
       signupForm.classList.remove("loading");
-      if (signupAvatar) { signupAvatar.className = "fa-regular fa-user-plus"; }
+      setLoading(signupForm, signupBtn, false);
+      if (signupAvatar) { signupAvatar.className = "fa-solid fa-user-plus"; }
       showToast("Account created! You can now sign in.", "success");
+      announce("Account created. You can now sign in.");
       sessionStorage.removeItem("auth_draft");
       switchForm("loginForm");
     }, 1500);
