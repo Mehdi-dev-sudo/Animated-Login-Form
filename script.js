@@ -122,7 +122,7 @@
       signupConfirm.value = pass;
       signupPass.dispatchEvent(new Event("input"));
       signupConfirm.dispatchEvent(new Event("input"));
-      showToast("Password generated and copied to both fields", "success");
+      showToast("Password generated and filled in both fields", "success");
     });
   }
 
