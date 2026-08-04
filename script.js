@@ -13,7 +13,20 @@
   const signupPass = document.getElementById("signupPass");
   const signupConfirm = document.getElementById("signupConfirm");
 
+  const loginBtn = loginForm.querySelector(".btn");
+  const signupBtn = signupForm.querySelector(".btn");
+  const announcer = document.getElementById("a11yAnnounce");
+
   let isLoading = false;
+
+  function announce(msg) {
+    if (announcer) announcer.textContent = msg;
+  }
+
+  function setLoading(form, btn, busy) {
+    form.setAttribute("aria-busy", busy ? "true" : "false");
+    btn.disabled = busy;
+  }
 
   // ===== Toast =====
   function showToast(message, type) {
@@ -89,6 +102,7 @@
   document.querySelectorAll(".btn").forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       if (this.disabled) return;
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       var rect = this.getBoundingClientRect();
       var ripple = document.createElement("span");
       ripple.className = "ripple";
@@ -308,6 +322,7 @@
 
     isLoading = true;
     loginForm.classList.add("loading");
+    setLoading(loginForm, loginBtn, true);
     // Avatar success hint
     var loginAvatar = loginForm.querySelector(".avatar i");
     if (loginAvatar) { loginAvatar.className = "fa-regular fa-circle-check"; }
@@ -315,9 +330,11 @@
     setTimeout(function () {
       isLoading = false;
       loginForm.classList.remove("loading");
+      setLoading(loginForm, loginBtn, false);
       if (loginAvatar) { loginAvatar.className = "fa-regular fa-user"; }
 
       showToast("Welcome back! Redirecting\u2026", "success");
+      announce("Signed in successfully.");
       // Save if "Remember me" is checked
       if (document.getElementById("remember").checked) {
         localStorage.setItem("auth_remember", JSON.stringify({ email: email, pass: pass }));
@@ -372,14 +389,17 @@
 
     isLoading = true;
     signupForm.classList.add("loading");
+    setLoading(signupForm, signupBtn, true);
     var signupAvatar = signupForm.querySelector(".avatar i");
     if (signupAvatar) { signupAvatar.className = "fa-regular fa-circle-check"; }
 
     setTimeout(function () {
       isLoading = false;
       signupForm.classList.remove("loading");
+      setLoading(signupForm, signupBtn, false);
       if (signupAvatar) { signupAvatar.className = "fa-solid fa-user-plus"; }
       showToast("Account created! You can now sign in.", "success");
+      announce("Account created. You can now sign in.");
       sessionStorage.removeItem("auth_draft");
       switchForm("loginForm");
     }, 1500);
