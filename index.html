@@ -43,7 +43,7 @@
     <div class="card-inner">
 
       <!-- ===== LOGIN ===== -->
-      <form class="form active" id="loginForm" novalidate autocomplete="off">
+      <form class="form active" id="loginForm" novalidate>
         <div class="avatar">
           <i class="fa-regular fa-user"></i>
         </div>
@@ -52,23 +52,23 @@
 
         <div class="field">
           <div class="field-input">
-            <input type="email" id="loginEmail" class="input" placeholder=" " required inputmode="email" maxlength="254" autocorrect="off" autocapitalize="off" spellcheck="false" />
+            <input type="email" id="loginEmail" class="input" placeholder=" " required inputmode="email" maxlength="254" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="email" aria-describedby="loginEmailErr" />
             <label for="loginEmail">Email</label>
             <span class="icon"><i class="fa-regular fa-envelope" aria-hidden="true"></i></span>
           </div>
-          <span class="error-text"></span>
+          <span class="error-text" id="loginEmailErr"></span>
         </div>
 
         <div class="field">
           <div class="field-input">
-            <input type="password" id="loginPass" class="input" placeholder=" " required maxlength="128" autocorrect="off" autocapitalize="off" spellcheck="false" />
+            <input type="password" id="loginPass" class="input" placeholder=" " required maxlength="128" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="current-password" aria-describedby="loginPassErr" />
             <label for="loginPass">Password</label>
             <span class="icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>
-            <button type="button" class="toggle-pass" data-target="loginPass" aria-label="Toggle password" data-tooltip="Show password">
+            <button type="button" class="toggle-pass" data-target="loginPass" aria-label="Toggle password visibility" data-tooltip="Show password">
               <i class="fa-regular fa-eye"></i>
             </button>
           </div>
-          <span class="error-text"></span>
+          <span class="error-text" id="loginPassErr"></span>
         </div>
 
         <div class="row">
@@ -100,29 +100,29 @@
 
         <div class="field">
           <div class="field-input">
-            <input type="text" id="signupName" class="input" placeholder=" " required maxlength="50" />
+            <input type="text" id="signupName" class="input" placeholder=" " required maxlength="50" autocomplete="name" aria-describedby="signupNameErr" />
             <label for="signupName">Full Name</label>
             <span class="icon"><i class="fa-regular fa-user" aria-hidden="true"></i></span>
           </div>
           <span class="char-counter" data-for="signupName">0/50</span>
-          <span class="error-text"></span>
+          <span class="error-text" id="signupNameErr"></span>
         </div>
 
         <div class="field">
           <div class="field-input">
-            <input type="email" id="signupEmail" class="input" placeholder=" " required inputmode="email" maxlength="254" autocorrect="off" autocapitalize="off" spellcheck="false" />
+            <input type="email" id="signupEmail" class="input" placeholder=" " required inputmode="email" maxlength="254" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="email" aria-describedby="signupEmailErr" />
             <label for="signupEmail">Email</label>
             <span class="icon"><i class="fa-regular fa-envelope" aria-hidden="true"></i></span>
           </div>
-          <span class="error-text"></span>
+          <span class="error-text" id="signupEmailErr"></span>
         </div>
 
         <div class="field">
           <div class="field-input">
-            <input type="password" id="signupPass" class="input" placeholder=" " required maxlength="128" autocorrect="off" autocapitalize="off" spellcheck="false" />
+            <input type="password" id="signupPass" class="input" placeholder=" " required maxlength="128" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="new-password" aria-describedby="signupPassErr" />
             <label for="signupPass">Password</label>
             <span class="icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>
-            <button type="button" class="toggle-pass" data-target="signupPass" aria-label="Toggle password" data-tooltip="Show password">
+            <button type="button" class="toggle-pass" data-target="signupPass" aria-label="Toggle password visibility" data-tooltip="Show password">
               <i class="fa-regular fa-eye"></i>
             </button>
             <button type="button" class="gen-pass" id="genPass" aria-label="Generate a secure password" data-tooltip="Generate password">
@@ -132,21 +132,21 @@
           <div class="strength-bar" id="strengthBar">
             <div class="strength-fill" id="strengthFill"></div>
           </div>
-          <span class="strength-text" id="strengthText"></span>
+          <span class="strength-text" id="strengthText" aria-live="polite"></span>
           <span class="char-counter" data-for="signupPass">0/128</span>
-          <span class="error-text"></span>
+          <span class="error-text" id="signupPassErr"></span>
         </div>
 
         <div class="field">
           <div class="field-input">
-            <input type="password" id="signupConfirm" class="input" placeholder=" " required maxlength="128" autocorrect="off" autocapitalize="off" spellcheck="false" />
+            <input type="password" id="signupConfirm" class="input" placeholder=" " required maxlength="128" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="new-password" aria-describedby="signupConfirmErr" />
             <label for="signupConfirm">Confirm Password</label>
             <span class="icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>
-            <button type="button" class="toggle-pass" data-target="signupConfirm" aria-label="Toggle password" data-tooltip="Show password">
+            <button type="button" class="toggle-pass" data-target="signupConfirm" aria-label="Toggle password visibility" data-tooltip="Show password">
               <i class="fa-regular fa-eye"></i>
             </button>
           </div>
-          <span class="error-text"></span>
+          <span class="error-text" id="signupConfirmErr"></span>
         </div>
 
         <label class="checkbox terms">

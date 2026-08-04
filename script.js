@@ -63,8 +63,12 @@
 
   function showError(input, show, msg) {
     input.classList.toggle("error", show);
-    if (show) { input.classList.add("shake"); setTimeout(function () { input.classList.remove("shake"); }, 500); }
-    else { input.classList.remove("error"); }
+    input.setAttribute("aria-invalid", show ? "true" : "false");
+    if (show) {
+      input.classList.remove("shake");
+      void input.offsetWidth;
+      input.classList.add("shake");
+    }
     var errorText = input.closest(".field").querySelector(".error-text");
     if (errorText) {
       errorText.textContent = show ? (msg || "") : "";
