@@ -199,21 +199,27 @@
     if (!active || !target || active === target) return;
 
     active.classList.add("out");
-    // Clear old form fields
-    active.querySelectorAll(".input").forEach(function (el) { el.value = ""; });
-    active.querySelectorAll(".error").forEach(function (el) { el.classList.remove("error"); });
+    // Clear old form fields, errors, and ARIA error state
+    active.querySelectorAll(".input").forEach(function (el) {
+      el.value = "";
+      el.classList.remove("error");
+      el.setAttribute("aria-invalid", "false");
+      var err = el.closest(".field").querySelector(".error-text");
+      if (err) err.textContent = "";
+    });
     setTimeout(function () {
       active.classList.remove("active", "out");
       target.classList.add("active");
-      document.getElementById("strengthBar").classList.remove("visible");
-      document.getElementById("strengthFill").style.width = "0%";
-      document.getElementById("strengthText").textContent = "";
+      strengthBar.classList.remove("visible");
+      strengthFill.style.width = "0%";
+      strengthText.textContent = "";
       // Avatar enter animation
       var avatar = target.querySelector(".avatar");
       if (avatar) { avatar.classList.remove("bounce-in"); void avatar.offsetWidth; avatar.classList.add("bounce-in"); }
       // Focus first input
       var firstInput = target.querySelector(".input");
       if (firstInput) firstInput.focus();
+      announce(formId === "loginForm" ? "Sign in form shown" : "Sign up form shown");
     }, 250);
   }
 

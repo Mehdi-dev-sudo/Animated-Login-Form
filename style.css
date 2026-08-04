@@ -314,7 +314,7 @@ body {
   font-family: inherit;
   color: var(--text);
   background: var(--input-bg);
-  border: 1.5px solid transparent;
+  border: var(--border-w) solid transparent;
   border-radius: var(--radius);
   outline: none;
   transition:
@@ -475,10 +475,6 @@ body {
 [data-tooltip]:hover::after {
   opacity: 1;
   transform: translateX(-50%) scale(1);
-}
-.toggle-pass:hover {
-  color: var(--primary);
-  background: rgba(168, 85, 247, 0.08);
 }
 
 /* ===== Password Generator ===== */
