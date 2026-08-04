@@ -881,7 +881,7 @@ body {
 /* ===== Theme Toggle ===== */
 .theme-toggle {
   position: fixed;
-  top: 20px;
+  top: 30px;
   right: 20px;
   z-index: 50;
   width: 40px;
