@@ -544,6 +544,10 @@ body {
   background: var(--primary);
   border-color: var(--primary);
 }
+.checkbox input:focus-visible + .check {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+}
 .checkbox input:checked + .check::after {
   opacity: 1;
   transform: scale(1);
